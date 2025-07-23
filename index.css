@@ -205,6 +205,8 @@ h3 {
     object-fit: cover;
     border-radius: 50%;
     display: block;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .social-links {
@@ -316,6 +318,8 @@ h3 {
     border-radius: 0;
     object-fit: cover;
     background: #222;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .project-content {
@@ -573,6 +577,8 @@ footer {
     object-fit: cover;
     background: #d6e3fa;
     box-shadow: 0 1.5px 18px #5e92f328;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .modal-title {
@@ -688,4 +694,10 @@ footer {
 .project-thumbnail-wrap video::-webkit-media-controls-fullscreen-button,
 .project-thumbnail-wrap video::-webkit-media-controls-picture-in-picture-button {
     display: none !important;
+}
+.section-divider {
+  border: 0;
+  border-top: 0.3em solid var(--border, #ccc);
+  margin: 1.5em 0;
+  width: 100%;
 }

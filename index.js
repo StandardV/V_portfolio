@@ -240,18 +240,26 @@ window.addEventListener('DOMContentLoaded', function() {
     const preview = Number(video.getAttribute('data-preview-time') || 0);
 
     // Seek to previewTime when loaded
-    video.addEventListener('loadedmetadata', function() {
-      if (!isNaN(preview) && preview >= 0 && preview < video.duration) {
+    video.addEventListener('loadedmetadata', handleVideoPreview);
+    if (video.readyState >= 1) {
+      // Metadata already loaded before listener was attached
+      handleVideoPreview.call(video);
+    }
+
+    function handleVideoPreview() {
+      const preview = Number(this.getAttribute('data-preview-time') || 0);
+      if (!isNaN(preview) && preview >= 0 && preview < this.duration) {
         let seekedOnce = false;
-        video.currentTime = preview;
-        video.addEventListener('seeked', function () {
+        this.currentTime = preview;
+        this.addEventListener('seeked', function seekHandler() {
           if (!seekedOnce) {
-            video.pause();
+            this.pause();
             seekedOnce = true;
+            this.removeEventListener('seeked', seekHandler);
           }
         });
       }
-    });
+    }
 
     // Prevent context menu for right click on video
     video.addEventListener('contextmenu', function(e){
