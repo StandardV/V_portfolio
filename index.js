@@ -30,22 +30,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section');
   function activateNav() {
-    const scrollTop = window.scrollY;
-    const navHeight = document.querySelector('nav').offsetHeight + 5;
-    const windowBottom = window.scrollY + window.innerHeight;
-    const documentHeight = Math.max(
-      document.body.scrollHeight, document.documentElement.scrollHeight,
-      document.body.offsetHeight, document.documentElement.offsetHeight,
-      document.body.clientHeight, document.documentElement.clientHeight
-    );
-    let index = sections.length;
-    while(--index && scrollTop + navHeight + 1 < sections[index].offsetTop) {}
+    let maxPercent = 0, activeIndex = 0;
+    const viewportTop = window.scrollY;
+    const viewportBottom = viewportTop + window.innerHeight;
+
+    sections.forEach((section, i) => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = viewportTop + rect.top;
+      const sectionBottom = viewportTop + rect.bottom;
+      const visibleTop = Math.max(sectionTop, viewportTop);
+      const visibleBottom = Math.min(sectionBottom, viewportBottom);
+      const visible = Math.max(0, visibleBottom - visibleTop);
+      const percentVisible = visible / rect.height;
+
+      if (percentVisible > maxPercent) {
+        maxPercent = percentVisible;
+        activeIndex = i;
+      }
+    });
+
     navLinks.forEach(link => link.classList.remove('active'));
-    if(documentHeight - windowBottom < 40) {
-      navLinks.forEach(link => link.classList.remove('active'));
-      navLinks[navLinks.length-1].classList.add('active');
-    } else if(navLinks[index]) {
-      navLinks[index].classList.add('active');
+    if (navLinks[activeIndex]) {
+      navLinks[activeIndex].classList.add('active');
     }
   }
   activateNav();
@@ -85,75 +91,107 @@ window.addEventListener('load', function() {
 
 //////////////////////////////////////////////////
 // PROJECT MODAL LOGIC
-
 const PROJECTS = [
   {
-    title: "E-Commerce Demo App",
-    mediaType: "video",
-    media: "https://www.w3schools.com/html/mov_bbb.mp4",
-    poster: "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg",
-    previewTime: 3,
-    tech: ["React", "Node.js", "Stripe"],
+    title: "Methane Gas Sensor Web App",
+    mediaType: "image",
+    media: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["Django", "JavaScript", "PostgreSQL", "Python", "C", "Bash"],
     links: [
-      {label:"Live Demo", url:"#"},
-      {label:"GitHub", url:"#"}
+      { label: "Demo", url: "#" },
+      { label: "Sample", url: "#" }
     ],
-    desc: `A robust commerce web-app with features like user authentication, live payments, admin dashboard, responsive product catalog and reviews. <br>
-    Scalable up to large traffic, full Node-based backend, and Stripe for payments. 
-    <ul>
-    <li>Full responsive layout, lightning fast</li>
-    <li>Admin analytics with sales, users, inventory charts</li>
-    <li>Automated email receipts and 2FA login</li>
-    </ul>
-    `,
+    desc: `Developed a real-time monitoring solution for methane gas sensors, featuring:<ul>
+      <li>Custom device driver for accurate gas concentration measurement</li>
+      <li>Automated PCB diagnosis prototype for rapid testing/fault detection</li>
+      <li>Full-stack web interface for data visualization and device management</li>
+    </ul>`,
     highlights: [
-      "Deployed with Docker on AWS EC2 (auto-scale)", 
-      "98/100 Lighthouse performance",
-      "Extended sales reports (CSV export), customer review system"
+      "Seamless hardware-software integration using automation scripts",
+      "Improved field testing speed and accuracy",
+      "Robust cross-language hardware abstraction (C, Python, Bash)"
     ]
   },
   {
-    title: "Analytics Dashboard",
+    title: "Wireline Simulator System",
     mediaType: "image",
-    media: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=400&q=80",
-    tech: ["Vue", "Flask", "D3.js"],
+    media: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["C", "Firmware", "Embedded", "Microcontrollers"],
     links: [
-      {label:"Live Demo", url:"#"},
-      {label:"GitHub", url:"#"}
+      { label: "Demo", url: "#" },
+      { label: "Documentation", url: "#" }
     ],
-    desc: `Business dashboard with real-time data streaming, interactive graphs, and reporting. Machine learning modules provide anomaly alerts and personalized insights.<ul>
-      <li>Live query builder and PDF export</li>
-      <li>Customizable chart widgets</li>
-      <li>Fast Flask API with JWT auth</li>
-    </ul>
-    `,
+    desc: `Engineered a wireline simulator system for downhole tool testing:<ul>
+      <li>Low-level firmware and control logic simulating wireline characteristics</li>
+      <li>Power regulator interface firmware (1kV) for system efficiency/protection</li>
+      <li>Resolved a critical, time-sensitive bug to maintain production schedule</li>
+    </ul>`,
     highlights: [
-      "Handles millions of daily database reads",
-      "Pluggable widgets system for extensibility",
-      "Full test suite (Pytest/Cypress)"
+      "Delivered reliable test tool for production environment",
+      "Designed robust diagnostic and recovery mechanisms",
+      "Improved accuracy of hardware-in-the-loop simulation"
     ]
   },
   {
-    title: "Team Collab Tool",
+    title: "WiFi/Bluetooth Radio Firmware",
     mediaType: "image",
-    media: "https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=400&q=80",
-    tech: ["React", "WebRTC", "MongoDB"],
+    media: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["C", "Firmware", "WiFi", "Bluetooth", "Diagnostics"],
     links: [
-      {label:"Live Demo", url:"#"},
-      {label:"GitHub", url:"#"}
+      { label: "Product", url: "#" },
+      { label: "Docs", url: "#" }
     ],
-    desc: `Integrated team hub: chat, file sharing, Kanban task lists, live video rooms. Designed for remote-first orgs, with role-based access and SSO support.<ul>
-    <li>Encrypted real-time chat via WebRTC/Socket.io</li>
-    <li>Task assignment and search</li>
-    <li>Slack/GDrive integrations</li></ul>
-    `,
+    desc: `Developed and integrated advanced wireless drivers for commercial device:<ul>
+      <li>WiFi, Bluetooth and radio stack implementation</li>
+      <li>Comprehensive device bring-up and testing procedures</li>
+      <li>Production troubleshooting with manufacturers for robust deployment</li>
+    </ul>`,
     highlights: [
-      "Used by 14+ remote teams in production",
-      "Live presence + @ channel mentions",
-      "Custom dark/light themes (user toggle)"
+      "Reduced production downtime through effective diagnostics",
+      "Ensured reliable device communication and connectivity",
+      "Created detailed SOPs for hardware/software handoff"
+    ]
+  },
+  {
+    title: "Smart Home Assistant",
+    mediaType: "image",
+    media: "https://images.unsplash.com/photo-1467987506553-8f3916508521?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["C#", "Python", "JavaScript", "OpenAL", "Porcupine", "Raspberry Pi", "Django"],
+    links: [
+      { label: "GitHub", url: "#" }
+    ],
+    desc: `Designed a full stack smart home assistant, enabling:<ul>
+      <li>Voice and web-based interface for device control (ASP.NET WinForms, Django)</li>
+      <li>Keyword recognition and natural language processing for responsiveness</li>
+      <li>Multi-system connectivity via custom hardware/software integration</li>
+    </ul>`,
+    highlights: [
+      "Integrated advanced voice keyword detection (Porcupine-style)",
+      "Extended with robust fallback web interface for accessibility",
+      "End-to-end home automation workflow"
+    ]
+  },
+  {
+    title: "OverEngineered Smart Light Switch",
+    mediaType: "image",
+    media: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["C", "Python", "Arduino", "Raspberry Pi", "IoT"],
+    links: [
+      { label: "GitHub", url: "#" }
+    ],
+    desc: `Created a smart light switch using a blend of embedded and IoT tech:<ul>
+      <li>Raspberry Pi, Arduino, and actuator for remote smart switching</li>
+      <li>Custom PCB; hand-built for deep hardware experience</li>
+      <li>Seamless integration with leading home assistants</li>
+    </ul>`,
+    highlights: [
+      "Combined multiple microcontroller systems",
+      "Enhanced voice and manual control for reliability",
+      "DIY approach for hardware/software learning"
     ]
   }
 ];
+
 
 const modal = document.getElementById('project-modal');
 const modalOverlay = modal && modal.querySelector('.modal-overlay');
@@ -161,25 +199,8 @@ const modalContent = modal && modal.querySelector('.modal-content');
 const modalBody = modal && modal.querySelector('.modal-body');
 const modalClose = modal && modal.querySelector('.modal-close');
 
-// Open modal on project card click (but not on video click!)
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', function(e){
-    // If clicking on video or project-links, do not open modal
-    if(e.target.closest('.project-preview-video') || e.target.closest('.project-links') || e.target.closest('a') || e.target.tagName === "A" || e.target.tagName === "BUTTON") return;
-    const pid = Number(card.getAttribute('data-project-id'));
-    showProjectModal(pid);
-  });
-  card.addEventListener('keydown', e => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      // Only open modal if last clicked not in video
-      const pid = Number(card.getAttribute('data-project-id'));
-      showProjectModal(pid);
-    }
-  });
-});
+// Modal open/close handling will be re-added automatically per render (see pagination code below)
 
-// Renders and opens the modal for project at index pid
 function showProjectModal(pid){
   if(!modal || !modalBody) return;
   const data = PROJECTS[pid];
@@ -220,8 +241,6 @@ function showProjectModal(pid){
   // Accessibility: focus close
   setTimeout(()=>{ modalClose && modalClose.focus(); }, 10);
 }
-
-// Close modal handler
 function closeModal(){
   if(!modal) return;
   modal.setAttribute("aria-hidden","true");
@@ -234,15 +253,15 @@ window.addEventListener('keydown', function(e){
   if(e.key === "Escape" && modal.classList.contains('active')) closeModal();
 });
 
-// --------  PROJECT VIDEO PREVIEW: SEEK + PLAY/PAUSE ON CLICK  --------
-window.addEventListener('DOMContentLoaded', function() {
+//////////////////////////////////////////////////
+// PROJECT VIDEO PREVIEW: SEEK + PLAY/PAUSE
+function attachProjectVideoPreviews() {
   document.querySelectorAll('.project-preview-video').forEach(function(video) {
     const preview = Number(video.getAttribute('data-preview-time') || 0);
 
     // Seek to previewTime when loaded
     video.addEventListener('loadedmetadata', handleVideoPreview);
     if (video.readyState >= 1) {
-      // Metadata already loaded before listener was attached
       handleVideoPreview.call(video);
     }
 
@@ -260,38 +279,147 @@ window.addEventListener('DOMContentLoaded', function() {
         });
       }
     }
-
-    // Prevent context menu for right click on video
+    let do_once = 1;
     video.addEventListener('contextmenu', function(e){
       e.preventDefault();
     });
-
-    // Remove controls bar
     video.removeAttribute('controls');
-
-    // Toggle play/pause on click/tap
+    const wrapper = video.closest('.project-thumbnail-wrap');
     video.addEventListener('click', function(e){
-    if (video.paused) {
-        // Reset to beginning before play
-        video.currentTime = 0;
+      if (video.paused) {
+        if (do_once !== 0)
+        {
+          video.currentTime = 0;
+          do_once -= 1;
+        }
         video.play();
-    } else {
+        wrapper.classList.add('playing');
+      } else {
         video.pause();
-    }
-    e.stopPropagation(); // prevent card click opening modal
-    });
-
-    // Keyboard: space/enter on video = play/pause (accessibility)
-    video.addEventListener('keydown', function(e){
-      if(e.key===" " || e.key==="Enter"){
-        if(video.paused){ video.play(); }
-        else { video.pause(); }
-        e.preventDefault();
-        e.stopPropagation();
+        wrapper.classList.remove('playing');
       }
+      e.stopPropagation();
     });
-
-    // Always visually paused at preview unless played:
+    // Update button state when video ends
+    video.addEventListener('ended', function() {
+      wrapper.classList.remove('playing');
+    });
     video.pause();
   });
-});
+}
+
+//////////////////////////////////////////////////
+// --- BEGIN Featured Projects Pagination ---
+
+const maxProjectsPerPage = 4;   // Or use a variable you set
+let currentProjectsPage = 0;
+
+const projectsGrid = document.querySelector('.projects-grid');
+const prevBtn = document.getElementById('projects-prev-btn');
+const nextBtn = document.getElementById('projects-next-btn');
+
+function renderProjectsPage(page = 0) {
+  if (!projectsGrid) return;
+
+  // Clear grid
+  projectsGrid.innerHTML = '';
+
+  // Calculate which projects to show
+  const start = page * maxProjectsPerPage;
+  const end = Math.min(start + maxProjectsPerPage, PROJECTS.length);
+
+  // Create cards
+  for (let i = start; i < end; i++) {
+    const data = PROJECTS[i];
+    // Build card element
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.setAttribute('data-project-id', i);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', 'More about ' + data.title);
+
+    // Thumbnail
+    let thumb = '';
+    if (data.mediaType === 'video') {
+      thumb = `<video
+        class="project-preview-video"
+        src="${data.media}"
+        data-preview-time="${data.previewTime||0}"
+        controls
+        muted
+        playsinline
+        preload="auto"
+        poster="${data.poster || ''}"
+        ></video>`;
+    }
+     else if (data.mediaType === 'image') {
+      thumb = `<img src="${data.media}" alt="${data.title}" />`;
+    }
+
+    // Skills/tech tags
+    const tech = (data.tech || []).map(t => `<span class="skill-tag">${t}</span>`).join('');
+
+    // Links
+    const links = (data.links || []).map(
+      l => `<a href="${l.url}" class="project-btn" target="_blank">${l.label}</a>`
+    ).join('');
+
+    // Card content
+    card.innerHTML = `
+      <div class="project-thumbnail-wrap">${thumb}</div>
+      <div class="project-content">
+        <h3>${data.title}</h3>
+        <p>${(data.desc || '').replace(/<[^>]+>/g, '').split('\n')[0]}</p>
+        <div class="skills">${tech}</div>
+        <div class="project-links">${links}</div>
+      </div>
+    `;
+    projectsGrid.appendChild(card);
+  }
+
+  // Modal listeners for new cards
+  projectsGrid.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.project-preview-video') || e.target.closest('.project-links') || e.target.tagName === "A" || e.target.tagName === "BUTTON") return;
+      const pid = Number(card.getAttribute('data-project-id'));
+      showProjectModal(pid);
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const pid = Number(card.getAttribute('data-project-id'));
+        showProjectModal(pid);
+      }
+    });
+  });
+
+  // Attach video preview logic here
+  attachProjectVideoPreviews();
+
+  // Pagination arrows - never hide, just disable when needed
+  const totalPages = Math.ceil(PROJECTS.length / maxProjectsPerPage);
+  prevBtn.disabled = (page <= 0);
+  nextBtn.disabled = (page >= totalPages-1);
+}
+
+if (prevBtn && nextBtn) {
+  prevBtn.onclick = function() {
+    if (currentProjectsPage > 0) {
+      currentProjectsPage--;
+      renderProjectsPage(currentProjectsPage);
+    }
+  };
+  nextBtn.onclick = function() {
+    const totalPages = Math.ceil(PROJECTS.length / maxProjectsPerPage);
+    if (currentProjectsPage < totalPages-1) {
+      currentProjectsPage++;
+      renderProjectsPage(currentProjectsPage);
+    }
+  };
+}
+
+// Initial render
+renderProjectsPage(0);
+
+//////////////////////////////////////////////////
+// END Featured Projects Pagination
