@@ -27,64 +27,52 @@ document.querySelectorAll('nav a.nav-link').forEach(function(link){
 
 // Burger Menu Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    // Create overlay element
-    const navOverlay = document.createElement('div');
-    navOverlay.className = 'nav-overlay';
-    
-    // Clone nav links into overlay
-    const navLinksClone = document.querySelector('.nav-links').cloneNode(true);
-    navOverlay.appendChild(navLinksClone);
-    
-    // Add overlay to nav
-    nav.appendChild(navOverlay);
-    
-    // Toggle burger menu
-    navToggle.addEventListener('click', function() {
-        nav.classList.toggle('nav-open');
-        navToggle.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        
-        // Prevent body scroll when menu is open
-        if (nav.classList.contains('nav-open')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close menu when clicking nav links
-    navOverlay.addEventListener('click', function(e) {
-        if (e.target.classList.contains('nav-link')) {
-            nav.classList.remove('nav-open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close menu when clicking outside
-    navOverlay.addEventListener('click', function(e) {
-        if (e.target === navOverlay) {
-            nav.classList.remove('nav-open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
-            nav.classList.remove('nav-open');
-            navToggle.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  // Create overlay element and clone nav-links inside it
+  const navOverlay = document.createElement('div');
+  navOverlay.className = 'nav-overlay';
+  const navLinksClone = document.querySelector('.nav-links').cloneNode(true);
+  navOverlay.appendChild(navLinksClone);
+  nav.appendChild(navOverlay);
+
+  // Toggle burger menu overlay
+  navToggle.addEventListener('click', function() {
+    nav.classList.toggle('nav-open');
+    navToggle.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+
+    // Prevent body scroll when menu is open
+    if (nav.classList.contains('nav-open')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close menu when clicking nav links or outside (overlay background)
+  navOverlay.addEventListener('click', function(e) {
+    if (e.target.classList.contains('nav-link') || e.target === navOverlay) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+      closeMenu();
+    }
+  });
+
+  // Helper to close menu and reset states
+  function closeMenu() {
+    nav.classList.remove('nav-open');
+    navToggle.classList.remove('active');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 });
 // ACTIVATE NAV ITEM BY SCROLL POSITION (bottom fix)
 document.addEventListener('DOMContentLoaded', function() {

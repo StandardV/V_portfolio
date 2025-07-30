@@ -893,169 +893,112 @@ img:fullscreen {
     background-color: black;
 }
 
-/* Burger Menu Toggle Button */
-/* Burger Menu Toggle Button */
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1001;
-    transition: color 0.3s ease;
-}
-
-.nav-toggle:hover {
-    color: var(--accent);
-}
-
-/* Mobile Navigation Links - Hidden by default */
-.nav-links {
-    display: flex;
-    transition: all 0.3s ease;
-}
-
-/* Burger Menu Overlay with Starry Background */
+/* Burger Menu Overlay Styling */
 .nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg);
-    z-index: 999;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
 }
 
+/* Active overlay: visible and interactive */
 .nav-overlay.active {
-    display: block;
-    opacity: 1;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Starry background for burger menu overlay */
-.nav-overlay::before,
-.nav-overlay::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-repeat: repeat;
-    background-position: 0 0;
-    animation: moveStars 100s linear infinite;
-}
-
-.nav-overlay::before {
-    background-image:
-        radial-gradient(3px 3px at 10% 20%, white, transparent),
-        radial-gradient(2px 2px at 30% 40%, white, transparent),
-        radial-gradient(2px 2px at 50% 70%, white, transparent),
-        radial-gradient(3px 3px at 80% 60%, white, transparent),
-        radial-gradient(2.5px 2.5px at 60% 10%, white, transparent),
-        radial-gradient(2.5px 2.5px at 90% 90%, white, transparent);
-    animation-duration: 100s;
-    opacity: 0.8;
-}
-
-.nav-overlay::after {
-    background-image:
-        radial-gradient(2px 2px at 20% 50%, white, transparent),
-        radial-gradient(2px 2px at 40% 10%, white, transparent),
-        radial-gradient(1.5px 1.5px at 70% 80%, white, transparent),
-        radial-gradient(2px 2px at 90% 20%, white, transparent),
-        radial-gradient(2px 2px at 30% 90%, white, transparent),
-        radial-gradient(1.5px 1.5px at 10% 10%, white, transparent);
-    animation-duration: 200s;
-    opacity: 0.6;
-}
-
+/* Nav links inside overlay: vertical layout on mobile */
 .nav-overlay .nav-links {
-    position: relative;
-    z-index: 1000;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    height: 100vh;
-    gap: 2rem;
-    padding: 0;
-    margin: 0;
-    display: flex;
+  display: flex;
+  user-select: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  height: 100vh;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  z-index: 10000;
 }
 
+/* Nav link list items */
 .nav-overlay .nav-links li {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1; /* Always visible */
-    transform: none; /* No animation */
-    animation: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Nav links styling inside overlay */
 .nav-overlay .nav-links a {
-    width: 100%;
-    text-align: center;
-    font-size: 1.8rem;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    background: rgba(37, 40, 43, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    display: block;
-    box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  background: rgba(37, 40, 43, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  color: var(--text);
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .nav-overlay .nav-links a:hover,
 .nav-overlay .nav-links a.active {
-    background: var(--accent);
-    color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(94, 146, 243, 0.3);
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(94, 146, 243, 0.3);
 }
 
-/* Media Queries for Mobile */
+/* Burger Menu Toggle Button */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10001; /* higher than overlay */
+  transition: color 0.3s ease;
+}
+
+.nav-toggle:hover {
+  color: var(--accent);
+}
+
+/* Show burger toggle on mobile widths */
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
-    }
-    
-    nav ul.nav-links {
-        display: none;
-    }
-    
-    /* Show burger menu when active */
-    nav.nav-open .nav-overlay {
-        display: block;
-        opacity: 1;
-    }
-    
-    nav.nav-open .nav-overlay .nav-links {
-        display: flex;
-    }
-    
-    /* Hamburger to X animation */
-    nav.nav-open .nav-toggle {
-        color: var(--accent);
-    }
+  .nav-toggle {
+    display: block;
+  }
+
+  nav ul.nav-links {
+    display: none; /* hide desktop nav on mobile */
+  }
 }
 
-/* Optional: Animate hamburger icon to X */
+/* Optional: change burger icon color when active */
 .nav-toggle.active {
-    transform: translateY(-50%) rotate(90deg);
+  color: var(--accent);
 }
 
-/* Close button styling when menu is open */
-nav.nav-open .nav-toggle::before {
-    content: '✕';
-    font-size: 1.2rem;
+/* Accessibility focus style for nav-toggle */
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
