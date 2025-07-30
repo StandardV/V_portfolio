@@ -91,31 +91,61 @@ window.addEventListener('load', function() {
 
 //////////////////////////////////////////////////
 // PROJECT MODAL LOGIC
+//TODO: future integration -- maybe change these into json for sever fetch for additional projects?
+//TODO: multi media support (video, image, etc) for each project (ideally scrollable or dynamic)
 const PROJECTS = [
   {
-    title: "Methane Gas Sensor Web App",
-    mediaType: "image",
-    media: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", // mock image
-    tech: ["Django", "JavaScript", "PostgreSQL", "Python", "C", "Bash"],
-    links: [
-      { label: "Demo", url: "#" },
-      { label: "Sample", url: "#" }
+    title: "Automated Job Application Assistant",
+    mediaType: "video",
+    media: "service_files/ite_apply.mp4",
+    poster: "service_files/holacoco.png",
+    previewTime: 6,
+    tech: [
+      "CustomTkinter", "Python", "SVM", "KNN", "Machine Learning", "Web Parsing", "Automation"
     ],
-    desc: `Developed a real-time monitoring solution for methane gas sensors, featuring:<ul>
-      <li>Custom device driver for accurate gas concentration measurement</li>
-      <li>Automated PCB diagnosis prototype for rapid testing/fault detection</li>
-      <li>Full-stack web interface for data visualization and device management</li>
+    links: [
+      { label: "GitHub", url: "https://github.com/StandardV/ITEApplication" },
+      { label: "Docs", url: "https://github.com/StandardV/ITEApplication/blob/main/README.md" }
+    ],
+    desc: `A desktop app that drastically streamlines job applications:<ul>
+      <li>Type a company name to save or select it—no repetitive Googling or career site navigation</li>
+      <li>One click: automatically navigates you to the correct company career page using ML & web parsing (SVM/KNN models)</li>
+      <li>Simulates reapply cool-downs by toggling active targets off after a set time</li>
+      <li>Integrates with extensions that auto-fill job forms for rapid batch applications</li>
     </ul>`,
     highlights: [
-      "Seamless hardware-software integration using automation scripts",
-      "Improved field testing speed and accuracy",
-      "Robust cross-language hardware abstraction (C, Python, Bash)"
+      "Saves significant time by automating the discovery of company career pages",
+      "Leverages machine learning (SVM/KNN) to identify correct results through web parsing and Google link analysis",
+      "Built with CustomTkinter for a modern desktop interface",
+      "Intelligent cooldown system prevents accidental re-applications",
+      "Designed for seamless integration with auto-fill browser extensions"
+    ]
+  },
+  {
+    title: "OverEngineered Smart Light Switch",
+    mediaType: "video",
+    media: "service_files/automatic_lightswitch.mp4",
+    poster: "service_files/holacoco.png",
+    previewTime: 3,
+    tech: ["C", "Python", "Arduino", "Raspberry Pi", "IoT"],
+    links: [
+      { label: "GitHub", url: "https://github.com/StandardV/ITEApplication" }
+    ],
+    desc: `Created a smart light switch using a blend of embedded and IoT tech:<ul>
+      <li>Raspberry Pi, Arduino, and actuator for remote smart switching</li>
+      <li>Custom PCB; hand-built for deep hardware experience</li>
+      <li>Seamless integration with leading home assistants</li>
+    </ul>`,
+    highlights: [
+      "Combined multiple microcontroller systems",
+      "Enhanced voice and manual control for reliability",
+      "DIY approach for hardware/software learning"
     ]
   },
   {
     title: "Wireline Simulator System",
     mediaType: "image",
-    media: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", // mock image
+    media: "service_files/wireline_simulator.jpg", // mock image
     tech: ["C", "Firmware", "Embedded", "Microcontrollers"],
     links: [
       { label: "Demo", url: "#" },
@@ -130,6 +160,31 @@ const PROJECTS = [
       "Delivered reliable test tool for production environment",
       "Designed robust diagnostic and recovery mechanisms",
       "Improved accuracy of hardware-in-the-loop simulation"
+    ]
+    },
+    {
+    title: "IoT-Controlled Christmas Lighting System",
+    mediaType: "video",
+    media: "service_files/christmas_light.mp4",
+    poster: "service_files/holacoco.png",
+    previewTime: 3,
+    tech: ["Python", "Bash", "Flask", "HTML", "CSS", "Raspberry Pi", "WiFi Networking"],
+    links: [
+      { label: "GitHub", url: "https://github.com/StandardV/ITEApplication" },
+      { label: "Demo", url: "#" }
+    ],
+    desc: `Engineered an interactive Christmas lighting solution powered by a Raspberry Pi:<ul>
+      <li>Remotely controls 24 outlets (3 × 8-relay banks) for dynamic holiday displays</li>
+      <li>Designed and deployed a Flask web app—accessible via a dedicated WiFi access point hosted by the Pi—enabling users to select and customize lighting patterns and blink frequencies in real-time</li>
+      <li>Flexible system architecture with full browser-based control, requiring no software installs for end users</li>
+      <li>Built with reliability and ease-of-use in mind, using Python and Bash scripts for backend automation and GPIO relay management</li>
+    </ul>`,
+    highlights: [
+      "Web-based user interface for instant lighting customization via local network",
+      "Supports unlimited blink patterns and frequency control, adaptable to any event or season",
+      "Turnkey WiFi AP setup on Raspberry Pi ensures simple, barrier-free access for users without network configuration",
+      "Robust, maintainable codebase leveraging Python for hardware control and Flask for web delivery",
+      "Showcases practical IoT integration, full-stack development, and real-world hardware automation experience"
     ]
   },
   {
@@ -154,11 +209,13 @@ const PROJECTS = [
   },
   {
     title: "Smart Home Assistant",
-    mediaType: "image",
-    media: "https://images.unsplash.com/photo-1467987506553-8f3916508521?auto=format&fit=crop&w=400&q=80", // mock image
+    mediaType: "video",
+    media: "service_files/smart_assistant.mp4",
+    poster: "service_files/holacoco.png",
+    previewTime: 3,
     tech: ["C#", "Python", "JavaScript", "OpenAL", "Porcupine", "Raspberry Pi", "Django"],
     links: [
-      { label: "GitHub", url: "#" }
+      { label: "GitHub", url: "https://github.com/StandardV?tab=repositories" }
     ],
     desc: `Designed a full stack smart home assistant, enabling:<ul>
       <li>Voice and web-based interface for device control (ASP.NET WinForms, Django)</li>
@@ -172,24 +229,25 @@ const PROJECTS = [
     ]
   },
   {
-    title: "OverEngineered Smart Light Switch",
+    title: "Methane Gas Sensor Web App",
     mediaType: "image",
-    media: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=400&q=80", // mock image
-    tech: ["C", "Python", "Arduino", "Raspberry Pi", "IoT"],
+    media: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", // mock image
+    tech: ["Django", "JavaScript", "PostgreSQL", "Python", "C", "Bash"],
     links: [
-      { label: "GitHub", url: "#" }
+      { label: "Github", url: "https://github.com/StandardV/ITEApplication" },
+      { label: "Demo", url: "#" }
     ],
-    desc: `Created a smart light switch using a blend of embedded and IoT tech:<ul>
-      <li>Raspberry Pi, Arduino, and actuator for remote smart switching</li>
-      <li>Custom PCB; hand-built for deep hardware experience</li>
-      <li>Seamless integration with leading home assistants</li>
+    desc: `Developed a real-time monitoring solution for methane gas sensors, featuring:<ul>
+      <li>Custom device driver for accurate gas concentration measurement</li>
+      <li>Automated PCB diagnosis prototype for rapid testing/fault detection</li>
+      <li>Full-stack web interface for data visualization and device management</li>
     </ul>`,
     highlights: [
-      "Combined multiple microcontroller systems",
-      "Enhanced voice and manual control for reliability",
-      "DIY approach for hardware/software learning"
+      "Seamless hardware-software integration using automation scripts",
+      "Improved field testing speed and accuracy",
+      "Robust cross-language hardware abstraction (C, Python, Bash)"
     ]
-  }
+  },
 ];
 
 
@@ -210,7 +268,12 @@ function showProjectModal(pid){
   if(data.mediaType === "video") {
     mediaHTML = `<video src="${data.media}" poster="${data.poster || ''}" controls autoplay muted playsinline loop preload="auto" style="max-width:100%;border-radius:11px"></video>`;
   } else if(data.mediaType === "image") {
-    mediaHTML = `<img src="${data.media}" alt="${data.title} Screenshot" />`;
+    mediaHTML = `<img 
+      src="${data.media}" 
+      alt="${data.title} Screenshot" 
+      class="modal-fullscreen-img"
+      style="cursor:zoom-in"
+    />`;
   }
   // Build tech
   let techTags = data.tech.map(t => `<span class="modal-tag">${t}</span>`).join('');
@@ -235,6 +298,21 @@ function showProjectModal(pid){
     ${highlights}
     <div class="modal-links">${links}</div>
   `;
+  const modalImg = modalBody.querySelector('.modal-fullscreen-img');
+  if (modalImg) {
+    modalImg.addEventListener('click', function() {
+      // Fullscreen API request
+      if (modalImg.requestFullscreen) {
+        modalImg.requestFullscreen();
+      } else if (modalImg.webkitRequestFullscreen) {
+        modalImg.webkitRequestFullscreen();
+      } else if (modalImg.mozRequestFullScreen) {
+        modalImg.mozRequestFullScreen();
+      } else if (modalImg.msRequestFullscreen) {
+        modalImg.msRequestFullscreen();
+      }
+    });
+  }
   modal.setAttribute("aria-hidden","false");
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
@@ -243,6 +321,12 @@ function showProjectModal(pid){
 }
 function closeModal(){
   if(!modal) return;
+  // Pause any video playing in modal
+  const video = modal.querySelector('video');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
   modal.setAttribute("aria-hidden","true");
   modal.classList.remove("active");
   document.body.style.overflow = "";
@@ -311,7 +395,7 @@ function attachProjectVideoPreviews() {
 //////////////////////////////////////////////////
 // --- BEGIN Featured Projects Pagination ---
 
-const maxProjectsPerPage = 4;   // Or use a variable you set
+const maxProjectsPerPage = 4;
 let currentProjectsPage = 0;
 
 const projectsGrid = document.querySelector('.projects-grid');
@@ -393,9 +477,7 @@ function renderProjectsPage(page = 0) {
     });
   });
 
-  // Attach video preview logic here
   attachProjectVideoPreviews();
-
   // Pagination arrows - never hide, just disable when needed
   const totalPages = Math.ceil(PROJECTS.length / maxProjectsPerPage);
   prevBtn.disabled = (page <= 0);
