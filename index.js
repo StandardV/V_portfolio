@@ -129,7 +129,7 @@ const PROJECTS = [
     previewTime: 3,
     tech: ["C", "Python", "Arduino", "Raspberry Pi", "IoT"],
     links: [
-      { label: "GitHub", url: "https://github.com/StandardV/ITEApplication" }
+      { label: "GitHub", url: "https://github.com/StandardV?tab=repositories" }
     ],
     desc: `Created a smart light switch using a blend of embedded and IoT tech:<ul>
       <li>Raspberry Pi, Arduino, and actuator for remote smart switching</li>
@@ -170,7 +170,7 @@ const PROJECTS = [
     previewTime: 3,
     tech: ["Python", "Bash", "Flask", "HTML", "CSS", "Raspberry Pi", "WiFi Networking"],
     links: [
-      { label: "GitHub", url: "https://github.com/StandardV/ITEApplication" },
+      { label: "GitHub", url: "https://github.com/StandardV?tab=repositories" },
       { label: "Demo", url: "#" }
     ],
     desc: `Engineered an interactive Christmas lighting solution powered by a Raspberry Pi:<ul>
@@ -234,7 +234,7 @@ const PROJECTS = [
     media: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", // mock image
     tech: ["Django", "JavaScript", "PostgreSQL", "Python", "C", "Bash"],
     links: [
-      { label: "Github", url: "https://github.com/StandardV/ITEApplication" },
+      { label: "Github", url: "https://github.com/StandardV?tab=repositories" },
       { label: "Demo", url: "#" }
     ],
     desc: `Developed a real-time monitoring solution for methane gas sensors, featuring:<ul>
