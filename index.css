@@ -894,6 +894,7 @@ img:fullscreen {
 }
 
 /* Burger Menu Toggle Button */
+/* Burger Menu Toggle Button */
 .nav-toggle {
     display: none;
     background: none;
@@ -981,39 +982,27 @@ img:fullscreen {
     position: relative;
     z-index: 1000;
     flex-direction: column;
-    align-items: stretch; /* Ensures children stretch to same width */
+    align-items: stretch;
     justify-content: center;
     height: 100vh;
     gap: 2rem;
     padding: 0;
     margin: 0;
-    display: flex; /* Ensure flex is always applied */
+    display: flex;
 }
 
 .nav-overlay .nav-links li {
-    width: 100%; /* Each li fills the width of the parent */
-    display: flex; /* So the link can stretch */
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideInUp 0.3s ease forwards;
-}
-
-.nav-overlay .nav-links li:nth-child(1) { animation-delay: 0.1s; }
-.nav-overlay .nav-links li:nth-child(2) { animation-delay: 0.2s; }
-.nav-overlay .nav-links li:nth-child(3) { animation-delay: 0.3s; }
-.nav-overlay .nav-links li:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes slideInUp {
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    opacity: 1; /* Always visible */
+    transform: none; /* No animation */
+    animation: none;
 }
 
 .nav-overlay .nav-links a {
-    width: 100%; /* Each link fills the li */
+    width: 100%;
     text-align: center;
     font-size: 1.8rem;
     padding: 1rem 2rem;
